@@ -1,0 +1,20 @@
+[{
+    $sort: {
+        totalAmount: -1
+    }
+}, {
+    $addFields: {
+        relativeTotalAmount: {
+            $divide: ['$totalAmount', 1354458.59]
+        }
+    }
+}, {
+    $limit: 28
+}, {
+    $group: {
+        _id: null,
+        topOrders: {
+            $sum: '$relativeTotalAmount'
+        }
+    }
+}]
